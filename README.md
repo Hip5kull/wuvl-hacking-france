@@ -14,11 +14,11 @@ Je vous conseille de copier le fichier du script dans votre $PATH `/usr/local/bi
 
 ### Fonctionnement
 
-`python3 vulnlab.py <machine>`
+`python3 vulnlab.py`
 
 Dans le $PATH:
 
-`vulnlab <machine>`
+`vulnlab`
 
-La version actuelle permet de récupérer les données de l'ensemble des machines.
+EDIT: **Version 1.1** ajout de la catégorie *chains*, choix utilisateur au lancement puis nom de la machine.
 

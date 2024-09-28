@@ -9,14 +9,25 @@ colors = {
     "Insane": "purple"
 }
 
-def main(argv):
-    if len(argv) != 1:
-        print('python3 vulnlab.py <machine_name>')
-        sys.exit(2)
+badges = {
+    "Easy": "success",
+    "Medium": "caution",
+    "Hard": "danger",
+    "Insane": "tip"
+}
 
-    machine_name = argv[0].capitalize()
+def main():
+    category = input("Choose a category: 1 for machines, 2 for chains: ")
+    if category == "1":
+        url = "https://api.vulnlab.com/api/v1/machines"
+    elif category == "2":
+        url = "https://api.vulnlab.com/api/v1/chains"
+    else:
+        print("Invalid category.")
+        sys.exit(1)
 
-    url = "https://api.vulnlab.com/api/v1/machines"
+    machine_name = input("Enter the machine name: ").capitalize()
+
     response = requests.get(url)
     data = json.loads(response.text)
 
@@ -33,13 +44,19 @@ def main(argv):
         print(f"Machine name '{machine_name}' not found on the website.")
         sys.exit(1)
     color = colors.get(difficulty, "unknown")
+    badge = badges.get(difficulty, "unknown")
 
     template = f"""---
-title: {machine_name} - {difficulty}
-description: WU {machine_name} - {difficulty}
+title: {machine_name}
+description: WU {machine_name}
 categories: [Writeup]
 tags: [writeup]
 template: doc
+sidebar:
+  order: A CHANGER
+  badge:
+    text: '{difficulty}'
+    variant: '{badge}'
 ---
 import {{ Image }} from 'astro:assets';
 import banner from '../../../../assets/writeup/vulnlab/banner.jpeg';
@@ -66,4 +83,4 @@ import banner from '../../../../assets/writeup/vulnlab/banner.jpeg';
         file.write(template)
 
 if __name__ == "__main__":
-   main(sys.argv[1:])
+   main()
