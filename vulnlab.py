@@ -55,7 +55,7 @@ categories: [Writeup]
 tags: [writeup]
 template: doc
 sidebar:
-  order: A CHANGER
+  order: 
   badge:
     text: '{difficulty}'
     variant: '{badge}'
